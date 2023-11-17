@@ -7,6 +7,8 @@ const fallBackImageUrl =
   "https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80";
 const searchHospitalUrl = 'https://medhive-backend.vercel.app/Hospitaldetails?'
 const searchSpecialityUrl = 'https://medhive-backend.vercel.app/SpecHospitals?'
+//const searchHospitalByName = 'http://localhost:4000/hospitalbyname?'
+const searchHospitalByName = 'https://medhive-backend.vercel.app/getSearchHospitals?'
 
 
 
@@ -23,6 +25,15 @@ const HospitalApi = {
   fetchHospitals : async function(){
     try{
       const response = await fetch(carouselFetchUrl);
+      const data = await response.json();
+      return data;
+    }catch(err){
+      return err;
+    }
+  },
+  fetchHospitalsbyname : async function(searchTerm){
+    try{
+      const response = await fetch(`${searchHospitalByName}initials=${searchTerm}`);
       const data = await response.json();
       return data;
     }catch(err){
@@ -52,5 +63,6 @@ export {
   NewsApi,
   searchHospitalUrl,
   searchSpecialityUrl,
+  searchHospitalByName,
   HospitalApi
 };

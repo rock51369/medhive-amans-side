@@ -14,8 +14,15 @@
         scrollbar-width: none;  /* Firefox */
     }
   }
+
+  
+    .pause {
+      animation-play-state: paused;
+    }
 }
 html,
 body {
   /* background-color: rgb(225, 248, 248); */
+  
 }
+

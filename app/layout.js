@@ -15,10 +15,12 @@ export default function RootLayout({ children }) {
       <Head>
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <body>
+      <body classname="">
         <ContextProvider>
           <Navbar />
+          <div >
           {children}
+          </div>
           <Footer />
         </ContextProvider>
       </body>

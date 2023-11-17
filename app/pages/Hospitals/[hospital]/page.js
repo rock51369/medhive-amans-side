@@ -18,6 +18,7 @@ export default function HosPage() {
     try {
       const response = await HospitalApi.fetchIndividualHospital(Id);
       setSingleHospital(response);
+      console.log(response)
     } catch (error) {
       setError(error);
     }

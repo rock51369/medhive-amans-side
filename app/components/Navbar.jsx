@@ -40,7 +40,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className="sticky top-0 z-20"
     >
-      <section className="w-full h-24 backdrop-blur-2xl bg-[#007BFF]/40 flex justify-between items-center p-4 px-10 text-xl text-black sm:justify-center sm:gap-10 sm:p-2">
+      <section className="w-full h-24 backdrop-blur-2xl bg-gradient-to-r from-blue-200 to-cyan-200  flex justify-between items-center p-4 px-10 text-xl text-black sm:justify-center sm:gap-10 sm:p-2 font-sans">
         <div className="w-1/2 flex items-center justify-between sm:w-4/5">
           <Link href={"/"}>
             <Image src="/logo.svg" width={100} height={100} alt="logo" />

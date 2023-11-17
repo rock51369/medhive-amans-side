@@ -28,11 +28,13 @@ export default function Carousel() {
 
   return (
     <>
+    
       {error
         ?
         <ErrorAnimation errorMessage={error.message} />
         :
-        <div className="w-full h-screen flex items-center overflow-x-hidden sm:h-fit sm:mt-10">
+        <div className="w-full h-screen flex items-center overflow-x-hidden sm:h-fit sm:mt-10 ">
+          
           <div
             className={`h-96 w-full flex justify-center ${hospitals && styles.slideTrack
               } ${isHovered && 'pause-scroll-animation'}`}
@@ -42,7 +44,7 @@ export default function Carousel() {
             {hospitals ?
               hospitals.map((value, index) => {
                 return (
-                  <section className="rounded-box ml-4 mx-4" key={index} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                  <section className="rounded-box ml-4 mx-4 " key={index} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                     <Card Hospital_Name={value.Hospital_Name.substring(0, 30) + '...'} imgLink={value.Image} id={index} H_No={value.H_No} />
                   </section>
                 );

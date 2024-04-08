@@ -9,7 +9,7 @@ import styles from "../styles/Footer.module.css"
 
 export default function Footer() {
     return (
-        <footer className={`h-[24rem] overflow-hidden backdrop-blur-md ${styles.gradientWithFade}`}>
+        <footer className={`h-[24rem] overflow-hidden backdrop-blur-md  bg-sky-300`}>
             <div className={styles.overlay}></div>
             <div className={styles.content}>
                 <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">

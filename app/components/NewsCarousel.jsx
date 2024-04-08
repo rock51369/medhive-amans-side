@@ -33,7 +33,8 @@ export default function NewsCarousel() {
   }
 
   return (
-    <section id="second-section" className="flex justify-center w-full h-screen items-center">
+    <section id="second-section" className="flex justify-center w-full h-screen items-center border-4">
+    
       {fetchedNews ?
         <div id="news-carousel" className="w-[80%] h-full grid grid-cols-3 grid-rows-6 gap-4 p-10 my-[20rem] sm:px-0 sm:py-10 sm:grid-cols-1">
           <div className="bg-white rounded-2xl row-span-4 sm:row-auto sm:col-auto h-full w-full overflow-hidden">

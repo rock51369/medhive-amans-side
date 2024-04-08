@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
 import { ErrorAnimation,LoadingAnimation } from "../components/LoadingAnimations";
+import { CiCreditCard1 } from "react-icons/ci";
 
 
 
@@ -24,6 +25,11 @@ const [formData, setFormData] = useState({
   date:"5/5/2023",
   MOP:"Cash",
   roomType:"General",
+  aadhar:"",
+  phoneNo:"",
+  address: "",
+  problem:"",
+  description: "",
 
   // roomId:roomId
 });
@@ -124,10 +130,13 @@ async function getRestData(){
 
   return (
     <section className="flex justify-center items-center w-screen h-screen  ">
+      <div className=" flex justify-start w-1/4 h-screen font-semibold text-4xl p-4">
+        {hospitalName}
+      </div>
       {/* onSubmit function needs to be called to post the formData */}
-      <form method="POST" className="w-full max-w-sm h-80" onSubmit={submitForm}>
+      <form method="POST" className="w-3/4 h-80" onSubmit={submitForm}>
       {/* <form method="POST" className="w-full max-w-sm h-80" > */}
-        <div className="flex flex-wrap -mx-3 mb-4 h-full p-4">
+        <div className="flex container border rounded-xl flex-wrap -mx-3 mb-4 h-full max-w-xl p-5">
           {/* hospital name */}
           <div className="w-full">
             <input
@@ -137,17 +146,45 @@ async function getRestData(){
               value={hospitalName}
               readOnly
               onChange={handleChange}
-              className="appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 "
+              className="appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline mb-2 "
             />
           </div>
           {/* Patient Name */}
-          <div className="w-full">
+          <div className="w-full flex gap-2">
             <input
               type="text"
               id="patName"
               name="patName"
-              className="appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-2 "
+              className="appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline mb-2 "
               placeholder="Patient name"
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              id="patNo"
+              name="PatNo"
+              className="appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline mb-2 "
+              placeholder="Phone no"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full">
+            <input
+              type="text"
+              id="patAddress"
+              name="patAddress"
+              className=" border  rounded-xl w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline mb-2 "
+              placeholder="Patient Adress"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="w-full">
+            <input
+              type="text"
+              id="patAadhar"
+              name="patAadhar"
+              className="appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline mb-2 "
+              placeholder="Patient Aadhar"
               onChange={handleChange}
             />
           </div>
@@ -168,6 +205,7 @@ async function getRestData(){
               Mode of Payment
             </label>
             <div className="flex items-center">
+              <CiCreditCard1 />
               <input
                 type="radio"
                 id="Cash"
@@ -230,6 +268,7 @@ async function getRestData(){
           </button>
         </div>
       </form>
+
     </section>
   );
 }

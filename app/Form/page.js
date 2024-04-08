@@ -1,5 +1,6 @@
 "use client";
 import submitHandler from "../support/postFetch";
+import { useRouter } from "next/navigation";
 import { use, useEffect, useState } from "react";
 
 import { ErrorAnimation,LoadingAnimation } from "../components/LoadingAnimations";
@@ -13,6 +14,8 @@ let todayDate = new Date().toJSON().slice(0, 10);
 
 const [roomCost,setRoomCost] = useState(6100)
 
+const router = useRouter();
+
 const [formData, setFormData] = useState({
   hospitalName: hospitalName,
   hospitalId: h_No,
@@ -25,27 +28,26 @@ const [formData, setFormData] = useState({
   // roomId:roomId
 });
 
-const handleRoomChange = (e)=>{
-  switch (e.target.value){
-    case "General" : {
-      setRoomCost(values[0].Room_Cost)
-      formData.roomId= values[0].Room_ID;
-    }
-    break;
-    // case "General" : console.log(values[0].Room_Cost);
-    case "Semi-Private" :{
-      setRoomCost(values[1].Room_Cost)
-      formData.roomId = values[1].Room_ID;
-    }
-    break;
-    case "Private" :{
-      setRoomCost(values[2].Room_Cost)
-      formData.roomId = values[2].Room_ID;
-    }
-    break;
+const handleRoomChange = (e) => {
+  const selectedRoomType = e.target.value;
+  switch (selectedRoomType) {
+    case "General":
+      setRoomCost(500);
+      //formData.roomId = values[0].Room_ID;
+      break;
+    case "Double bed Premium":
+      setRoomCost(1200);
+      //formData.roomId = values[1].Room_ID;
+      break;
+    case "Single bed Premium":
+      setRoomCost(2400);
+      //formData.roomId = values[2].Room_ID;
+      break;
+    default:
+      break;
   }
   handleChange(e);
-}
+};
 
 const handleChange = (e) => {
   const { name, value } = e.target;
@@ -54,55 +56,65 @@ const handleChange = (e) => {
     [name]: value
   }));
 };
-// console.log(formData);
+//console.log(formData);
 
-// fetching the rest details to show in the form
+//fetching the rest details to show in the form
 async function getRestData(){
-  const res = await fetch(`http://localhost:8000/form_details?ID=${h_No}`)
+  const res = await fetch(`http://localhost:4000/form_details?ID=${h_No}`)
   const result = await res.json()
+  console.log(result);
   return result;
+  
 }
 
-const [values, setValues] = useState(null);
+  const [values, setValues] = useState({});
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchFromDetails() {
-      try {
-        const data = await getRestData();
-        setValues(data);
-      } catch (error) {
-        setError(error);
+    useEffect(() => {
+      async function fetchFromDetails() {
+        try {
+          const data = await getRestData();
+          setValues(data);
+          //console.log(values);
+        } catch (error) {
+          setError(error);
+        }
       }
-    }
-    fetchFromDetails();
-  }, []);
+      fetchFromDetails();
+    }, []);
 
   if (error) {
     return <ErrorAnimation errorMessage={error.message} />;
   }
 
+  useEffect(() => {
+    console.log(values);
+}, [values]);
+
   if (!values) {
     return <LoadingAnimation />;
   }
 
-  // console.log(values);
+  //console.log(values);
 
 
 
  async function submitForm(e){
    e.preventDefault()
-  const res = await fetch("http://localhost:8000/fetch-data",{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-  })
-  const result = await res.json()
+  //   const res = await fetch("http://localhost:4000/fetch-data",{
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   },
+  //   body: JSON.stringify(formData)
+  // })
+  //  const result = await res.json()
   // if there is result then this alert will show other wise null
-  alert(result.message)
-  return result;
+  //alert(result.message)
+  alert("Your Bed has been booked");
+
+  router.push('/');
+  //return result;
   // We don't want the page to refresh
   // console.log("am here");
   // const res = await fetch("http://localhost:8000/fetch-data")
@@ -196,9 +208,9 @@ const [values, setValues] = useState(null);
           <>
           <label htmlFor="roomType" className="mr-2">Choose a room:</label>
           <select className="focus:outline-none" id="roomType" name="roomType" onChange={handleRoomChange}>
-          <option value={values[0].Room_Type}>{values[0].Room_Type}</option>
-          <option value={values[1].Room_Type}>{values[1].Room_Type}</option>
-          <option value={values[2].Room_Type}>{values[2].Room_Type}</option>
+          <option value="General">General</option>
+          <option value="Double bed Premium">Double bed Premium</option>
+          <option value="Single bed Premium">Single bed Premium</option>
           </select>
           </>
           <>
